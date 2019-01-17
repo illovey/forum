@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'App'
+    'app'
 ]
 
 MIDDLEWARE = [
@@ -80,7 +80,7 @@ DATABASES = {
         'NAME': 'forum',
         'USER': 'root',
         'PASSWORD': os.environ.get('MYSQL_ROOT_PWD'),
-        'HOST':os.environ.get('MYSQL_HOST'),
+        'HOST': os.environ.get('MYSQL_HOST'),
         'PORT':'3306',
     }
 }
