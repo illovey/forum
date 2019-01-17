@@ -31,6 +31,15 @@ post /api/user/register
 
 | 参数     | 类型   |
 | -------- | ------ |
-| username | String |
+| username | string |
 | password | string |
+
+# 三、数据库
+
+users(用户表)
+
+| 字段     | 类型        |
+| -------- | ----------- |
+| username | varchar(50) |
+| password | char(32)    |
 
