@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'App'
 ]
 
 MIDDLEWARE = [
@@ -75,8 +76,14 @@ WSGI_APPLICATION = 'forum.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',  # 或者使用 mysql.connector.django
+        'NAME': 'forum',
+        'USER': 'root',
+        # 'PASSWORD': os.environ.get('MYSQLROOTPWD'),
+        'PASSWORD': 'dh666436',
+
+        'HOST':'localhost',
+        'PORT':'3306',
     }
 }
 
