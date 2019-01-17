@@ -36,6 +36,12 @@ post /api/user/register
 
 # 三、数据库
 
+## 库名
+
+forum
+
+## 表名
+
 users(用户表)
 
 | 字段     | 类型        |
