@@ -13,3 +13,24 @@
 6、普通用户注册功能（管理员默认存在）
 
 7、下载帖子（把帖子存为txt文件，然后保存在本地）
+
+# 二、API
+
+## 注册
+
+post /api/user/register
+
+| 参数     | 类型   |
+| -------- | ------ |
+| username | string |
+| password | string |
+
+## 登录
+
+/api/user/login
+
+| 参数     | 类型   |
+| -------- | ------ |
+| username | String |
+| password | string |
+
