@@ -79,9 +79,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',  # 或者使用 mysql.connector.django
         'NAME': 'forum',
         'USER': 'root',
-        # 'PASSWORD': os.environ.get('MYSQLROOTPWD'),
-        'PASSWORD': 'dh666436',
-
+        'PASSWORD': os.environ.get('MYSQLROOTPWD'),
         'HOST':'localhost',
         'PORT':'3306',
     }
