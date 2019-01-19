@@ -26,11 +26,35 @@
                             maxlength="8" />
                     </div>
                     <div class="form-group col-md-offset-9">
-                        <button type="submit" class="btn btn-success pull-right" name="submit">注册</button>
+                        <button type="submit" class="btn btn-success pull-right" name="submit" id="register-btn">注册</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </body>
+<script src="/static/js/jquery-3.3.1.min.js"></script>
+<script src="/static/js/info.js"></script>
+<script>
+    $(document).ready(function() {
+        $("#register-btn").click(function() {
+            var username = $("#username").val();
+            var password = $("#password").val();
+
+            $.ajax({
+                type: "POST",
+                url: "/api/user/register/",
+                data: {"username": username, "password": password},
+                dataType: "json",
+                success: function(data) {
+                    if(data.code == -1) {
+                        show_box('error', data.info, 1000);
+                    } else {
+                        window.location.href = "/home/index";
+                    }
+                }
+            });
+        });
+    });
+</script>
 </html>
