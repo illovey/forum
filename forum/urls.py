@@ -9,4 +9,6 @@ urlpatterns = [
     url(r'^home/index$', homecontroller.index),
     url(r'^home/register$', homecontroller.register),
     url(r'^api/user/register/$', usercontroller.register),
+    url(r'^home/login$', homecontroller.login),
+    url(r'^api/user/login/$', usercontroller.login),
 ]

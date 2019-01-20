@@ -8,3 +8,7 @@ def index(request):
 def register(request):
     if request.method == "GET":
         return render(request, 'home/register.html')
+
+def login(request):
+    if request.method == "GET":
+        return render(request, 'home/login.html')
