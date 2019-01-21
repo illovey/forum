@@ -10,6 +10,16 @@ def register(request):
         username = request.POST['username']
         password = request.POST['password']
 
+        if not all([username, password]):
+            return JsonResponse({"code": -1, "info": "请填写用户名或密码"})
+
+        try:
+            res = Users.objects.get(username = username)
+        except Exception as e:
+            res = None
+        if res:
+            return JsonResponse({"code": -1, "info": "用户名已经存在"})
+
         # encryption
         sh1 = sha1()
         sh1.update(password.encode('utf-8'))
