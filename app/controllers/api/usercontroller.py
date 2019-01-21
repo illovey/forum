@@ -1,6 +1,7 @@
 # pylint: disable=no-member
 from django.shortcuts import render
 from django.http import JsonResponse
+import operator
 
 from app.models import Users
 from hashlib import sha1
@@ -30,23 +31,24 @@ def register(request):
 
         if username == "" or password == "":
             return JsonResponse({"code": -1, "info": "请填写用户名或者密码"})
-        else:
-            return JsonResponse({"code": 0, "info": ""})
+            
+        return JsonResponse({"code": 0, "info": ""})
 
 def login(request):
     if request.method == "POST":
         username = request.POST['username']
         password = request.POST['password']
 
-        # encryption
         try:
             user = Users.objects.get(username = username)
-            sh1 = sha1()
-            sh1.update(password.encode('utf-8'))
-            pwdd = sh1.hexdigest()
-            if user.password == pwdd:
-                return JsonResponse({"code": 0, "info": ""})
-            else:
-                return JsonResponse({"code": -1, "info": "密码错误"}) 
-        except:
-            return JsonResponse({"code": -1, "info": "用户不存在"}) 
+        except Exception as e:
+            return JsonResponse({"code": -1, "info": "用户名或密码错误"}) 
+        
+        sh1 = sha1()
+        sh1.update(password.encode('utf-8'))
+        pwdd = sh1.hexdigest()
+
+        if user.password != pwdd:
+            return JsonResponse({"code": -1, "info": "用户名或密码错误"})
+
+        return JsonResponse({"code": 0, "info": ""})
