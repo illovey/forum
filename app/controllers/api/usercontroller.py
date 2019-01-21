@@ -40,7 +40,6 @@ def login(request):
 
         # encryption
         try:
-
             user = Users.objects.get(username = username)
             sh1 = sha1()
             sh1.update(password.encode('utf-8'))
