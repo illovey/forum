@@ -57,8 +57,8 @@ def login(request):
 
 # 通过session判断用户是否已登录
 def detect_login(request):
-     # 获取session中username
-     username = request.session.get('username', '')
-     if not username:
-         return JsonResponse({"code": -1, "info": "未登录"})
-     return JsonResponse({"code": 0, "info": "已经登录"})
+    # 获取session中username
+    username = request.session.get('username', '')
+    if not username:
+        return JsonResponse({"code": -1, "info": "未登录"})
+    return JsonResponse({"code": 0, "info": "已经登录"})
