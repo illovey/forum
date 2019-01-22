@@ -2,6 +2,7 @@
 from django.shortcuts import render
 from django.http import JsonResponse
 import operator
+from django.http import HttpResponseRedirect
 
 from app.models import Users
 from hashlib import sha1
@@ -16,7 +17,7 @@ def register(request):
 
         try:
             res = Users.objects.get(username = username)
-        except Exception as e:
+        except:
             res = None
         if res:
             return JsonResponse({"code": -1, "info": "用户名已经存在"})
@@ -41,7 +42,7 @@ def login(request):
 
         try:
             user = Users.objects.get(username = username)
-        except Exception as e:
+        except:
             return JsonResponse({"code": -1, "info": "用户名或密码错误"}) 
         
         sh1 = sha1()
@@ -50,5 +51,14 @@ def login(request):
 
         if user.password != pwdd:
             return JsonResponse({"code": -1, "info": "用户名或密码错误"})
-
+        
+        request.session['username'] = user.username
         return JsonResponse({"code": 0, "info": ""})
+
+# 通过session判断用户是否已登录
+def detect_login(request):
+     # 获取session中username
+     username = request.session.get('username', '')
+     if not username:
+         return JsonResponse({"code": -1, "info": "未登录"})
+     return JsonResponse({"code": 0, "info": "已经登录"})

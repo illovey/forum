@@ -50,9 +50,18 @@
 <script src="/static/bootstrap/js/bootstrap.min.js"></script>
 <script>
     $(document).ready(function() {
-        $("#login-li").click(function() {
-            $("#login-li").remove();
-        });
+        $.ajax({
+                type: "POST",
+                url: "/api/user/detect_login/",
+                dataType: "json",
+                success: function(data) {
+                    if(data.code == -1) {
+                        $("#logout-li").remove;
+                    } else {
+                        $("#login-li").remove();
+                    }
+                }
+            });
     });
 </script>
 </html>

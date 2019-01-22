@@ -11,4 +11,5 @@ urlpatterns = [
     url(r'^api/user/register/$', usercontroller.register),
     url(r'^home/login$', homecontroller.login),
     url(r'^api/user/login/$', usercontroller.login),
+    url(r'^api/user/detect_login/$', usercontroller.detect_login),
 ]
