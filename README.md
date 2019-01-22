@@ -34,6 +34,14 @@ post /api/user/register
 | username | string |
 | password | string |
 
+## 登出
+
+/api/user/logout
+
+| 参数 | 类型 |
+| ---- | ---- |
+| 无   | 无   |
+
 # 三、数据库
 
 ## 库名
