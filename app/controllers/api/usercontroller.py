@@ -61,4 +61,6 @@ def detect_login(request):
     username = request.session.get('username', '')
     if not username:
         return JsonResponse({"code": -1, "info": "未登录"})
-    return JsonResponse({"code": 0, "info": "已经登录"})
+    
+    body = {"username": username}
+    return JsonResponse({"code": 0, "info": "已经登录", "body": body})

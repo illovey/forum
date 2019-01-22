@@ -12,3 +12,7 @@ def register(request):
 def login(request):
     if request.method == "GET":
         return render(request, 'home/login.html')
+
+def profile(request):
+    if request.method == "GET":
+        return render(request, 'home/profile.html')
