@@ -37,7 +37,7 @@
             <ul class="dropdown-menu">
                 <li><a href="#">详细资料</a></li>
                 <li role="separator" class="divider"></li>
-                <li id="login-li"><a href="#">登录</a></li>
+                <li id="login-li"><a href="/home/login">登录</a></li>
                 <li id="logout-li"><a href="#">登出</a></li>
             </ul>
             </li>
@@ -56,7 +56,7 @@
                 dataType: "json",
                 success: function(data) {
                     if(data.code == -1) {
-                        $("#logout-li").remove;
+                        $("#logout-li").remove();
                     } else {
                         $("#login-li").remove();
                     }
