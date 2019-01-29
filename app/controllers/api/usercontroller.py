@@ -64,3 +64,4 @@ def detect_login(request):
     
     body = {"username": username}
     return JsonResponse({"code": 0, "info": "已经登录", "body": body})
+

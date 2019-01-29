@@ -54,6 +54,16 @@ users(用户表)
 
 | 字段     | 类型        |
 | -------- | ----------- |
+| id | int        |
 | username | varchar(50) |
 | password | char(32)    |
 
+posts(帖子表)
+
+| 字段        | 类型        |
+| ----------- | ----------- |
+| id          | int         |
+| title       | varchar(50) |
+| content     | text        |
+| create_time | int         |
+| user_id     | int         |

@@ -16,3 +16,7 @@ def login(request):
 def profile(request):
     if request.method == "GET":
         return render(request, 'home/profile.html')
+
+def post_editing(request):
+    if request.method == "GET":
+        return render(request, 'home/post_editing.html')

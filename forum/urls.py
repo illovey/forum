@@ -3,6 +3,7 @@ from django.conf.urls import url
 # from module import class
 # from app.controllers.usercontroller import Usercontroller
 from app.controllers.api import usercontroller
+from app.controllers.api import postcontroller
 from app.controllers import homecontroller
 
 urlpatterns = [
@@ -13,4 +14,7 @@ urlpatterns = [
     url(r'^home/login$', homecontroller.login),
     url(r'^api/user/login/$', usercontroller.login),
     url(r'^api/user/detect_login/$', usercontroller.detect_login),
+    url(r'^api/post/post_editing$', postcontroller.post_editing),
+    url(r'^home/post_editing$', homecontroller.post_editing),
+    
 ]
