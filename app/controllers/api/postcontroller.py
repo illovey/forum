@@ -17,9 +17,8 @@ def post_editing(request):
 
     create_time = int(time.time())
     username = request.session.get('username', '')
-    user_id = Users.objects.get(username = username).id
 
-    post = Posts(title = title, content = content, create_time = create_time, user_id = user_id)
+    post = Posts(title = title, content = content, create_time = create_time, username = username)
     post.save()
     return JsonResponse({"code": 0, "info": ""})
 
