@@ -44,8 +44,23 @@
 <script>
     $(document).ready(function() {
         $.ajax({
+            type: "POST",
+            url: "/api/user/detect_login/",
+            dataType: "json",
+            success: function(data) {
+                if(data.code == -1) {
+                    $("#logout-li").remove();
+                } else {
+                    console.log(data.body);
+                    $("#login-li").remove();
+                }
+            }
+        });
+
+        $("#logout-li").click(function() {
+            $.ajax({
                 type: "POST",
-                url: "/api/user/detect_login/",
+                url: "/api/user/logout/",
                 dataType: "json",
                 success: function(data) {
                     if(data.code == -1) {
@@ -56,6 +71,7 @@
                     }
                 }
             });
+        });
     });
 </script>
 </html>

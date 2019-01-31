@@ -48,6 +48,7 @@
             var title = $("#post-title").val();
             var content = editor.txt.text();
             //var create_time = new Date().getTime();
+            var flag = 0;
 
             $.ajax({
                 type: "POST",
@@ -56,20 +57,20 @@
                 success: function(data) {
                     if(data.code == -1) {
                         window.location.href = "/home/login";
-                    }
-                }
-            });
-
-            $.ajax({
-                type: "POST",
-                url: "/api/post/post_editing/",
-                data: {"title": title, "content": content},
-                dataType: "json",
-                success: function(data) {
-                    if(data.code == -1) {
-                        show_box('error', data.info, 1000);
                     } else {
-                        window.location.href = "/home/index";
+                        $.ajax({
+                            type: "POST",
+                            url: "/api/post/post_editing/",
+                            data: {"title": title, "content": content},
+                            dataType: "json",
+                            success: function(data) {
+                                if(data.code == -1) {
+                                    show_box('error', data.info, 1000);
+                                } else {
+                                    window.location.href = "/home/index";
+                                }
+                            }
+                        });
                     }
                 }
             });

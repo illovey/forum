@@ -55,6 +55,11 @@ def login(request):
         request.session['username'] = user.username
         return JsonResponse({"code": 0, "info": ""})
 
+def logout(request):
+    del request.session["username"]
+    return JsonResponse({"code": 0, "info": "success"})
+
+
 # 通过session判断用户是否已登录
 def detect_login(request):
     # 获取session中username

@@ -13,6 +13,7 @@ urlpatterns = [
     url(r'^api/user/register/$', usercontroller.register),
     url(r'^home/login$', homecontroller.login),
     url(r'^api/user/login/$', usercontroller.login),
+    url(r'^api/user/logout/$', usercontroller.logout),
     url(r'^api/user/detect_login/$', usercontroller.detect_login),
     url(r'^api/post/post_editing/$', postcontroller.post_editing),
     url(r'^home/post_editing$', homecontroller.post_editing),
