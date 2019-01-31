@@ -15,19 +15,8 @@
 </body>
 <script src="/static/js/jquery-3.3.1.min.js"></script>
 <script src="/static/bootstrap/js/bootstrap.min.js"></script>
+<script src="/static/js/timeUtil.js"></script>
 <script>
-    function timeStampToDatetime (s){
-        var datetime = new Date();
-        datetime.setTime(s * 1000);
-        var year = datetime.getFullYear();
-        var month = datetime.getMonth() + 1;
-        var date = datetime.getDate();
-        var hour = datetime.getHours();
-        var minute = datetime.getMinutes();
-        var second = datetime.getSeconds();
-        return year + "-" + month + "-" + date + " " + hour + ":"+ minute + ":" + second;
-    };
-
     $(document).ready(function() {
         $.ajax({
             type: "POST",
