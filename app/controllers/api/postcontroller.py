@@ -31,3 +31,9 @@ def getuserposts(request):
     result = serializers.serialize('json', list(postsQuerySet))
     return JsonResponse({"code": 0, "info": "", "body": result})
 
+def post_details(request):
+    if request.method == "POST":
+        post_id = request.POST['post_id']
+    postsQuerySet = Posts.objects.filter(id = post_id)    
+    result = serializers.serialize('json', list(postsQuerySet))
+    return JsonResponse({"code": 0, "info": "", "body": result})

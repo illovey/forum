@@ -16,7 +16,9 @@ urlpatterns = [
     url(r'^api/user/logout/$', usercontroller.logout),
     url(r'^api/user/detect_login/$', usercontroller.detect_login),
     url(r'^api/post/post_editing/$', postcontroller.post_editing),
+    url(r'^api/post/post_details/$', postcontroller.post_details),
     url(r'^home/post_editing$', homecontroller.post_editing),
     url(r'^home/myposts$', homecontroller.myposts),
     url(r'^api/post/getuserposts$', postcontroller.getuserposts),
+    url(r'^home/post_details$', homecontroller.post_details),
 ]

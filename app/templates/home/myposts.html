@@ -40,7 +40,7 @@
                                 var title_html_str = "<h3>" + post.fields.title + "</h3>";
                                 var content_html_str = "<div>" + post.fields.content + "</div>";
                                 var time_html_str = "<span class='glyphicon glyphicon-time'></span><span>" + timeStampToDatetime(post.fields.create_time) + "</span>";
-                                posts_html = posts_html + "<a href='#' class='list-group-item'>" + title_html_str + content_html_str + time_html_str + "</a>";
+                                posts_html = posts_html + "<a href='/home/post_details?id=" + post.pk + "'class='list-group-item'>" + title_html_str + content_html_str + time_html_str + "</a>";
                             }
 
                             $("#post-list").html(posts_html);

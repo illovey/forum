@@ -24,3 +24,7 @@ def post_editing(request):
 def myposts(request):
     if request.method == "GET":
         return render(request, 'home/myposts.html')
+
+def post_details(request):
+    if request.method == "GET":
+        return render(request, 'home/post_details.html')

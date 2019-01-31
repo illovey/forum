@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+{% include 'home/header.html' %}  
+<body>
+    <nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">论坛</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <form class="navbar-form navbar-left">
+            <div class="form-group">
+            <input type="text" class="form-control" placeholder="Search">
+            </div>
+            <button type="submit" class="btn btn-default">Submit</button>
+        </form>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="#">Link</a></li>
+            <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">个人中心<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+                <li><a href="/home/profile">我的主页</a></li>
+                <li role="separator" class="divider"></li>
+                <li id="login-li"><a href="/home/login">登录</a></li>
+                <li id="logout-li"><a href="#">登出</a></li>
+            </ul>
+            </li>
+        </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+    </nav>
+    <div>
+        <h1 id="title"></h1>
+        <h4 id="create-time"></h4>
+        <div id="content">
+        </div>
+    </div>
+</body>
+<script src="/static/js/jquery-3.3.1.min.js"></script>
+<script src="/static/bootstrap/js/bootstrap.min.js"></script>
+<script src="/static/js/timeUtil.js"></script>
+<script>
+    function getQueryVariable(variable) {
+       var query = window.location.search.substring(1);
+       var vars = query.split("&");
+       for (var i=0;i<vars.length;i++) {
+               var pair = vars[i].split("=");
+               if(pair[0] == variable){return pair[1];}
+       }
+       return null;
+    }
+
+    $(document).ready(function() {
+        $.ajax({
+            type: "POST",
+            url: "/api/user/detect_login/",
+            dataType: "json",
+            success: function(data) {
+                if(data.code == -1) {
+                    $("#logout-li").remove();
+                } else {
+                    $("#login-li").remove();
+                }
+            }
+        });
+
+        $("#logout-li").click(function() {
+            $.ajax({
+                type: "POST",
+                url: "/api/user/logout/",
+                dataType: "json",
+                success: function(data) {
+                    if(data.code == -1) {
+                        $("#logout-li").remove();
+                    } else {
+                        console.log(data.body);
+                        $("#login-li").remove();
+                    }
+                }
+            });
+        });
+
+        var post_id = getQueryVariable("id");
+        $.ajax({
+            type: "POST",
+            url: "/api/post/post_details/",
+            data: {"post_id": post_id},
+            dataType: "json",
+            success: function(data) {
+                if(data.code == 0) {
+                    var posts_str = data.body
+                    var posts = JSON.parse(posts_str);
+                    console.log(posts[0].fields.title);
+                    $("#title").text(posts[0].fields.title);
+                    $("#create-time").text(timeStampToDatetime(posts[0].fields.create_time));
+                    $("#content").text(posts[0].fields.content);
+                }
+            }
+        });
+    });
+</script>
+</html>
