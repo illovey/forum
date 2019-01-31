@@ -16,5 +16,6 @@ urlpatterns = [
     url(r'^api/user/detect_login/$', usercontroller.detect_login),
     url(r'^api/post/post_editing/$', postcontroller.post_editing),
     url(r'^home/post_editing$', homecontroller.post_editing),
-    
+    url(r'^home/myposts$', homecontroller.myposts),
+    url(r'^api/post/getuserposts$', postcontroller.getuserposts),
 ]

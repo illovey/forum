@@ -20,3 +20,7 @@ def profile(request):
 def post_editing(request):
     if request.method == "GET":
         return render(request, 'home/post_editing.html')
+
+def myposts(request):
+    if request.method == "GET":
+        return render(request, 'home/myposts.html')
