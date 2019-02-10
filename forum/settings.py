@@ -48,6 +48,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'app.mymiddleware.QtsAuthenticationMiddleware'
 ]
 
 ROOT_URLCONF = 'forum.urls'
@@ -69,6 +70,12 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'forum.wsgi.application'
+
+EXCLUDE_URL =  (
+     '/home/register',
+    '/home/login',  
+    '/home/index'    
+)
 
 
 # Database
