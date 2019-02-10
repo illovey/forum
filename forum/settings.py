@@ -72,9 +72,8 @@ TEMPLATES = [
 WSGI_APPLICATION = 'forum.wsgi.application'
 
 EXCLUDE_URL =  (
-     '/home/register',
-    '/home/login',  
-    '/home/index'    
+    '/home/login',
+    '/api/user/login/',
 )
 
 

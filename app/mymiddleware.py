@@ -13,8 +13,9 @@ class QtsAuthenticationMiddleware(MiddlewareMixin):
         url_path = request.path
         for each in exclued_path:
             if re.match(each, url_path):
-               return  JsonResponse({"code": 0, "info": ""})
-        if request.user.is_authenticated:
-            return 
-        else:
+               return 
+        username = request.session.get('username', '')
+        if not username:
             return HttpResponseRedirect('/home/login')
+        else:
+            return 
