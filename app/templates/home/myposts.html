@@ -9,44 +9,54 @@
     <link href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-    <div class="list-group" id="post-list">
-        
-    </div>
+    <div class="list-group" id="post-list"></div>
+    <nav aria-label="Page navigation">
+        <ul class="pagination">
+            <li id="previous">
+                <a href="#" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            <li id="next">
+                <a href="#" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        </ul>
+          </nav>
 </body>
 <script src="/static/js/jquery-3.3.1.min.js"></script>
 <script src="/static/bootstrap/js/bootstrap.min.js"></script>
 <script src="/static/js/timeUtil.js"></script>
+<script src="/static/js/queryStringUtil.js"></script>
 <script>
     $(document).ready(function() {
+        var page = getQueryVariable("page");
         $.ajax({
-            type: "POST",
-            url: "/api/user/detect_login/",
+            type: "GET",
+            url: "/api/post/getuserposts",
+            data: {"page": page},
             dataType: "json",
             success: function(data) {
-                if(data.code == -1) {
-                    window.location.href = "/home/index";
-                } else {
-                    $.ajax({
-                        type: "POST",
-                        url: "/api/post/getuserposts",
-                        dataType: "json",
-                        success: function(data) {
-                            var posts_str = data.body
-                            var posts = JSON.parse(posts_str);
-                            var posts_html = "";
-                            var d = new Date();
-                            for( let post of posts) {
-                                console.log(post);
-                                var title_html_str = "<h3>" + post.fields.title + "</h3>";
-                                var content_html_str = "<div>" + post.fields.content + "</div>";
-                                var time_html_str = "<span class='glyphicon glyphicon-time'></span><span>" + timeStampToDatetime(post.fields.create_time) + "</span>";
-                                posts_html = posts_html + "<a href='/home/post_details?id=" + post.pk + "'class='list-group-item'>" + title_html_str + content_html_str + time_html_str + "</a>";
-                            }
-
-                            $("#post-list").html(posts_html);
-                        }
-                    });
+                var posts_str = data.body.posts
+                var total = data.body.total
+                var posts = JSON.parse(posts_str);
+                var posts_html = "";
+                var d = new Date();
+                for( let post of posts) {
+                    var title_html_str = "<h3>" + post.fields.title + "</h3>";
+                    var content_html_str = "<div>" + post.fields.content + "</div>";
+                    var time_html_str = "<span class='glyphicon glyphicon-time'></span><span>" + timeStampToDatetime(post.fields.create_time) + "</span>";
+                    posts_html = posts_html + "<a href='/home/post_details?id=" + post.pk + "'class='list-group-item'>" + title_html_str + content_html_str + time_html_str + "</a>";
                 }
+                $("#post-list").html(posts_html);
+                
+                var len = total / 3 + 1;
+                var nav_html = '';
+                for (var i = 1; i <= len; i++) {
+                    nav_html += "<li><a href='/home/myposts?page=" + i + "'>" + i + "</a></li>";
+                }
+                $("#previous").after(nav_html);
             }
         });
     });

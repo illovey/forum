@@ -25,11 +25,21 @@ def post_editing(request):
     return JsonResponse({"code": 0, "info": ""})
 
 def getuserposts(request):
+    page = request.GET['page']
+    if not page:
+        page = 1
+    
     username = request.session.get('username', '')
-    postsQuerySet = Posts.objects.filter(username=username)
+    total = Posts.objects.filter(username=username).count()
+    start = (int(page) - 1) * 3
 
-    result = serializers.serialize('json', list(postsQuerySet))
-    return JsonResponse({"code": 0, "info": "", "body": result})
+    postsQuerySet = Posts.objects.filter(username=username)[start:start + 3]
+    for postQuerySet in postsQuerySet:
+        postQuerySet.content = postQuerySet.content[0:50] + "..."
+
+    posts = serializers.serialize('json', list(postsQuerySet))
+
+    return JsonResponse({"code": 0, "info": "", "body": {'posts': posts, 'total': total}})
 
 def post_details(request):
     if request.method == "POST":

@@ -37,7 +37,7 @@
             <ul class="dropdown-menu">
                 <li><a href="#">我的主页</a></li>
                 <li role="separator" class="divider"></li>
-                <li id="login-li"><a href="/home/login">登录</a></li>
+                <li><a href="/home/post_editing">帖子编辑</a></li>
                 <li id="logout-li"><a href="#">登出</a></li>
             </ul>
             </li>
@@ -49,21 +49,4 @@
 </body>
 <script src="/static/js/jquery-3.3.1.min.js"></script>
 <script src="/static/bootstrap/js/bootstrap.min.js"></script>
-<script>
-    $(document).ready(function() {
-        $.ajax({
-                type: "POST",
-                url: "/api/user/detect_login/",
-                dataType: "json",
-                success: function(data) {
-                    if(data.code == -1) {
-                        $("#logout-li").remove();
-                    } else {
-                        $("#profile-name").text(data.body.username);
-                        $("#login-li").remove();
-                    }
-                }
-            });
-    });
-</script>
 </html>

@@ -47,30 +47,17 @@
         $("#submit-btn").click(function() {
             var title = $("#post-title").val();
             var content = editor.txt.text();
-            //var create_time = new Date().getTime();
-            var flag = 0;
 
             $.ajax({
                 type: "POST",
-                url: "/api/user/detect_login/",
+                url: "/api/post/post_editing/",
+                data: {"title": title, "content": content},
                 dataType: "json",
                 success: function(data) {
                     if(data.code == -1) {
-                        window.location.href = "/home/login";
+                        show_box('error', data.info, 1000);
                     } else {
-                        $.ajax({
-                            type: "POST",
-                            url: "/api/post/post_editing/",
-                            data: {"title": title, "content": content},
-                            dataType: "json",
-                            success: function(data) {
-                                if(data.code == -1) {
-                                    show_box('error', data.info, 1000);
-                                } else {
-                                    window.location.href = "/home/index";
-                                }
-                            }
-                        });
+                        window.location.href = "/home/index";
                     }
                 }
             });
