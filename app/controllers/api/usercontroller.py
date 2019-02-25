@@ -26,13 +26,8 @@ def register(request):
         sh1 = sha1()
         sh1.update(password.encode('utf-8'))
         pwdd = sh1.hexdigest()
-        print(len(pwdd))
         user = Users(username=username, password=pwdd)
         user.save()
-
-        if username == "" or password == "":
-            return JsonResponse({"code": -1, "info": "请填写用户名或者密码"})
-            
         return JsonResponse({"code": 0, "info": ""})
 
 def login(request):

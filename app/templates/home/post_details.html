@@ -74,7 +74,6 @@
                 if(data.code == 0) {
                     var posts_str = data.body
                     var posts = JSON.parse(posts_str);
-                    console.log(posts[0].fields.title);
                     $("#title").text(posts[0].fields.title);
                     $("#create-time").text(timeStampToDatetime(posts[0].fields.create_time));
                     $("#content").text(posts[0].fields.content);
